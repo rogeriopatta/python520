@@ -42,61 +42,62 @@
 #     'florentina'
 # ]
 
-# #Atribuindo todas as figuras públicas para uma lista
-# figuras_publicas = [bolsonaro, lula, hitler, tiririca]
+#!/usr/bin/python3
 
+#######
+## Exercicio de excessões
+#######
 
-# #atribuindo todas os apelidos a um arquivo de texto
-
-# for figura in figuras_publicas:
-#     for apelido in figura:
-#         with open('politicos.txt', 'a') as arquivo:
-#             arquivo.write(apelido + '\n')
-
-
-#print(figuras_publicas)
-
-#definindo lista de nomes
-lista_nomes = []
-
-
+#Abro o arquivo de politicos para leitura
 with open('politicos.txt','r') as arquivo:
-    figuras_publicas = arquivo.readline()
-with open('nomes.txt','r') as nomes:
-    lista_nomes = [nomes.replace('\n','')for nome in nomes.readlines()]
+    #pego a lista de todos os politicos com o readlines que retorna
+    #uma lista
+    figuras_publicas = arquivo.readlines()
+# para testar o conteúdo de figuras públicas
+# print(figuras_publicas)
 
+try: #abro o bloco para tratamento de exceções
+    while True: #código roda em um loop infinito
 
-try:
-    while True:
-        #requisição pelo nome
-        print(figuras_publicas)
+        #pego a lista de nomes cadastrados com o with open em modo
+        #de leitura
+        with open('nomes.txt','r') as nomes:
+            lista_nomes = nomes.readlines() # pega a lista com todos os nomes
+        
+        # Pegando a entrada de nome
         nome = input('Digite um nome: ').lower().strip()
+        nome += '\n' #acrescentar o \n para trabalhar no padrão de quebra de linha
 
-        # para cada figura publica, vou validar o nome digitado
-        
-        if nome in figuras_publicas:
-            cad_figura_publica = True
-        
-        else:
-            cad_figura_publica = False
         #Criando lógica para cadastro
-        if cad_figura_publica:
-            raise ValueError('vc tentu inserir uma figura publica!!')
-            #print('Lançando erro Cadastro de figuras')
+        if nome in figuras_publicas: # se o nome for de politico
+            #gero uma exceção
+            raise ValueError('Você tentou inserir uma figura pública')
+        # se o nome já estiver na lista de nomes
         elif nome in lista_nomes:
+            #mostro que o nome já existe e não faço mais nada
             print('nome Já existe')
-        elif nome == 'visualizar':
+        # se eu digitar o nome como visualizar
+        elif nome == 'visualizar\n':
+            #faço um loop dentro da lista de nomes
             for nome_cadastrado in lista_nomes:
-                print(nome_cadastrado,end=', ')
+                #mostro o nome no indice do loop separado com ,
+                print(nome_cadastrado.replace('\n','').title(),end=', ')
+            #quando acaba a lista eu dou uma quebra de linha
             print('\n')
+        # se não cair em nenhuma validação
+        # significa que o nome pode ser cadastrado
         else:
-            print('\n'*50)
-            with open('nomes.txt', 'a')as nome:
-                nome.write(nome + '\n')
+            #abro o arquivo em modo de acrescentar (append)
+            with open('nomes.txt','a') as nome_arquivo:
+                #cadastro minha variável nome
+                nome_arquivo.write(nome)
+            #mostro uma mensagem falando que foi realizado com sucesso
             print('Cadastro Realizado')
-            #lista_nomes.append(nome)
-
-except Exception:
+#se ele der o erro definido para dar quando cadastramos um politico
+except ValueError:
+    # mandar uma mensagem de erro
     print('Você tentou cadastrar uma figura pública')
-    print(lista_nomes)
-
+# Tratar qualquer outro erro
+except Exception as e:
+    #mostra a mensagem de erro de uma forma formatada
+    print('Deu ruim: ', e)
