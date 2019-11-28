@@ -26,8 +26,11 @@
 # import os        # permite funcionalidades do sistema operacional
 #import sys         # acessar variaveis do sistema e alguns parametro especificos
 #import datetime     # data e hora
-import json         # codifica e ou arquivo no formato JSON
-# import csv      # trabalha com planilhas
+#import json         # codifica e ou arquivo no formato JSON
+import csv      # trabalha com planilhas
+
+
+# o.s
 
 #print(os.listdir('/home/developer')) # lista pastas do diretorio
 
@@ -42,6 +45,8 @@ import json         # codifica e ou arquivo no formato JSON
 # print(sys.argv)
 # print(sys.exit)
 # print('hello')
+
+#datetime
 
 # print(datetime.datetime.now())
 
