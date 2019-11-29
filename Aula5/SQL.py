@@ -2,6 +2,8 @@
 
 #!/usr/bin/env python3
 
+#programa para interfaceamento entre o python e o SQL
+
 import psycopg2
 import MySQLdb
 

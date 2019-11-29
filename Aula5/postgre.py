@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+#programa para interfaceamento entre o python e postgree
+
 import psycopg2
 
 from orm import Banco
