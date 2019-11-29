@@ -25,6 +25,7 @@ except Exception as e:
 finally:
     cur.close()
     con.close()
+    print('o')
 
 
 
